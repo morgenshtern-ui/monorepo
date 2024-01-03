@@ -47,14 +47,21 @@ importers:
 
   config/tsconfig: {}
 
+  packages/ssr-window:
+    dependencies:
+      '@teleskop-labs/utils':
+        specifier: workspace:*
+        version: link:../../utils
+
   packages/swiper:
+    dependencies:
+      '@teleskop-labs/ssr-window':
+        specifier: workspace:*
+        version: link:../ssr-window
     devDependencies:
-      typescript:
-        specifier: ^5.2.2
-        version: 5.3.3
       vite:
-        specifier: ^5.0.8
-        version: 5.0.10(@types/node@20.10.6)
+        specifier: 5.0.8
+        version: 5.0.8(@types/node@20.10.6)
 
   utils:
     dependencies:
@@ -3798,7 +3805,7 @@ packages:
       debug: 4.3.4
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 5.0.10(@types/node@20.10.6)
+      vite: 5.0.8(@types/node@20.10.6)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3810,8 +3817,8 @@ packages:
       - terser
     dev: true
 
-  /vite@5.0.10(@types/node@20.10.6):
-    resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
+  /vite@5.0.8(@types/node@20.10.6):
+    resolution: {integrity: sha512-jYMALd8aeqR3yS9xlHd0OzQJndS9fH5ylVgWdB+pxTwxLKdO1pgC5Dlb398BUxpfaBxa4M9oT7j1g503Gaj5IQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -3890,7 +3897,7 @@ packages:
       strip-literal: 1.3.0
       tinybench: 2.5.1
       tinypool: 0.8.1
-      vite: 5.0.10(@types/node@20.10.6)
+      vite: 5.0.8(@types/node@20.10.6)
       vite-node: 1.1.1(@types/node@20.10.6)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:

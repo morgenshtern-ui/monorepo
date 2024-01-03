@@ -184,6 +184,7 @@ export default async function make() {
         'ts/no-unnecessary-type-constraint': 'error',
         'ts/no-unsafe-argument': 'off', // TODO: disabled
         'ts/no-unsafe-assignment': 'off', // TODO: disabled
+        'ts/no-unsafe-call': 'off', // TODO: disabled
         'ts/no-unsafe-declaration-merging': 'error',
         'ts/no-unsafe-enum-comparison': 'error',
         'ts/no-unsafe-member-access': 'off', // TODO: disabled

@@ -1,15 +1,17 @@
 {
-  "name": "swiper",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@teleskop-labs/swiper",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "@teleskop-labs/ssr-window": "workspace:*"
+  },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "5.0.8"
   }
 }

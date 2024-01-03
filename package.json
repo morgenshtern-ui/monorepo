@@ -1,5 +1,5 @@
 {
-  "name": "monorepo",
+  "name": "@teleskop-labs/monorepo",
   "private": true,
   "type": "module",
   "scripts": {

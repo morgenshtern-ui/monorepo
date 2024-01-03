@@ -1,5 +1,5 @@
 /* eslint no-param-reassign: "off" */
-import { getDocument } from 'ssr-window';
+import { getDocument } from '@teleskop-labs/ssr-window';
 import {
 	extend,
 	deleteProps,
@@ -7,10 +7,10 @@ import {
 	elementChildren,
 	elementStyle,
 	elementIndex,
-} from '../shared/utils.mjs';
-import { getSupport } from '../shared/get-support.mjs';
-import { getDevice } from '../shared/get-device.mjs';
-import { getBrowser } from '../shared/get-browser.mjs';
+} from '../shared/utils.js';
+import { getSupport } from '../shared/getSupport.js';
+import { getDevice } from '../shared/getDevice.js';
+import { getBrowser } from '../shared/getBrowser.js';
 
 import Resize from './modules/resize/resize.mjs';
 import Observer from './modules/observer/observer.mjs';
@@ -30,7 +30,7 @@ import checkOverflow from './check-overflow/index.mjs';
 
 import defaults from './defaults.mjs';
 import moduleExtendParams from './moduleExtendParams.mjs';
-import { processLazyPreloader, preload } from '../shared/process-lazy-preloader.mjs';
+import { processLazyPreloader, preload } from '../shared/processLazyPreloader.js';
 
 const prototypes = {
 	eventsEmitter,

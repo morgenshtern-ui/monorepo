@@ -1,0 +1,23 @@
+{
+  "name": "@teleskop-labs/utils",
+  "type": "module",
+  "version": "1.0.0",
+  "private": "true",
+  "sideEffects": false,
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "eslint": "eslint . --max-warnings 0",
+    "eslint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "p-limit": "^5.0.0",
+    "throttle-debounce": "^5.0.0"
+  },
+  "devDependencies": {
+    "@teleskop-labs/eslint-config": "workspace:*",
+    "@types/throttle-debounce": "^5.0.2"
+  }
+}

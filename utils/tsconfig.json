@@ -1,0 +1,14 @@
+{
+  "extends": "@teleskop-labs/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}

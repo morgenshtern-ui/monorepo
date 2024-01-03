@@ -1,7 +1,7 @@
 {
   "name": "monorepo",
   "private": true,
-	"type": "module",
+  "type": "module",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -9,15 +9,20 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "bump": "taze major -I -r"
   },
-  "devDependencies": {
-    "eslint": "8.56.0",
-    "prettier": "3.1.0",
-    "taze": "0.13.1",
-    "turbo": "1.11.2",
-    "typescript": "5.3.3"
-  },
   "packageManager": "pnpm@8.14.0",
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "@teleskop-labs/eslint-config": "workspace:*",
+    "@teleskop-labs/tsconfig": "workspace:*",
+    "@types/node": "20.10.6",
+    "eslint": "npm:eslint-ts-patch@8.56.0-0",
+    "eslint-ts-patch": "8.56.0-0",
+    "prettier": "3.1.0",
+    "taze": "0.13.1",
+    "turbo": "1.11.2",
+    "typescript": "5.3.3",
+    "vitest": "1.1.1"
   }
 }

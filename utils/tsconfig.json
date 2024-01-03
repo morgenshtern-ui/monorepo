@@ -1,14 +1,5 @@
 {
   "extends": "@teleskop-labs/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "target": "es2018",
-    "lib": ["esnext"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+  "include": ["src", "eslint.config.ts"],
+  "exclude": ["node_modules", "dist", "build", "coverage", "test", "tests", "testsuite", "testsuites", "tmp", "temp", "vendor"]
 }

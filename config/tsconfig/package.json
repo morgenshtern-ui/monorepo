@@ -1,0 +1,16 @@
+{
+	"name": "@teleskop-labs/tsconfig",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"./tsconfig.json",
+		"./tsconfig.base.json",
+		"./tsconfig.node.json",
+		"./tsconfig.web.json"
+	]
+}

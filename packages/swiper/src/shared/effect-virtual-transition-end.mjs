@@ -1,4 +1,4 @@
-import { elementTransitionEnd } from './utils.mjs';
+import { elementTransitionEnd } from './utils.mjs'
 
 export default function effectVirtualTransitionEnd({
   swiper,
@@ -6,42 +6,51 @@ export default function effectVirtualTransitionEnd({
   transformElements,
   allSlides,
 }) {
-  const { activeIndex } = swiper;
+  const { activeIndex } = swiper
   const getSlide = (el) => {
     if (!el.parentElement) {
       // assume shadow root
-      const slide = swiper.slides.filter(
-        (slideEl) => slideEl.shadowRoot && slideEl.shadowRoot === el.parentNode,
-      )[0];
-      return slide;
+      const slide = swiper.slides.find(
+        slideEl => slideEl.shadowRoot && slideEl.shadowRoot === el.parentNode,
+      )
+
+      return slide
     }
-    return el.parentElement;
-  };
+
+    return el.parentElement
+  }
+
   if (swiper.params.virtualTranslate && duration !== 0) {
-    let eventTriggered = false;
-    let transitionEndTarget;
-    if (allSlides) {
-      transitionEndTarget = transformElements;
-    } else {
-      transitionEndTarget = transformElements.filter((transformEl) => {
+    let eventTriggered = false
+    let transitionEndTarget
+
+    transitionEndTarget = allSlides
+      ? transformElements
+      : transformElements.filter((transformEl) => {
         const el = transformEl.classList.contains('swiper-slide-transform')
           ? getSlide(transformEl)
-          : transformEl;
-        return swiper.getSlideIndex(el) === activeIndex;
-      });
-    }
-    transitionEndTarget.forEach((el) => {
+          : transformEl
+
+        return swiper.getSlideIndex(el) === activeIndex
+      })
+
+    for (const el of transitionEndTarget) {
       elementTransitionEnd(el, () => {
-        if (eventTriggered) return;
-        if (!swiper || swiper.destroyed) return;
-        eventTriggered = true;
-        swiper.animating = false;
+        if (eventTriggered)
+          return
+
+        if (!swiper || swiper.destroyed)
+          return
+
+        eventTriggered = true
+        swiper.animating = false
         const evt = new window.CustomEvent('transitionend', {
           bubbles: true,
           cancelable: true,
-        });
-        swiper.wrapperEl.dispatchEvent(evt);
-      });
-    });
+        })
+
+        swiper.wrapperEl.dispatchEvent(evt)
+      })
+    }
   }
 }

@@ -1,3 +1,3 @@
 export default function maxTranslate() {
-  return -this.snapGrid[this.snapGrid.length - 1];
+  return -this.snapGrid.at(-1)
 }

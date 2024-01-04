@@ -1,6 +1,7 @@
+/* eslint-disable unicorn/better-regex */
 export default function classesToSelector(classes = '') {
   return `.${classes
     .trim()
-    .replace(/([\.:!+\/])/g, '\\$1') // eslint-disable-line
-    .replace(/ /g, '.')}`;
+    .replaceAll(/([\.:!+\/])/g, '\\$1')
+    .replaceAll(' ', '.')}`
 }

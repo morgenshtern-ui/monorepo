@@ -1,4 +1,4 @@
-import addClasses from './addClasses.mjs';
-import removeClasses from './removeClasses.mjs';
+import addClasses from './addClasses.mjs'
+import removeClasses from './removeClasses.mjs'
 
-export default { addClasses, removeClasses };
+export default { addClasses, removeClasses }

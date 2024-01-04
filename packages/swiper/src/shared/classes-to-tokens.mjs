@@ -2,5 +2,5 @@ export default function classesToTokens(classes = '') {
   return classes
     .trim()
     .split(' ')
-    .filter((c) => !!c.trim());
+    .filter(c => !!c.trim())
 }

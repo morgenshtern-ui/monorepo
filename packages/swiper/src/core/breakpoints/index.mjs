@@ -1,4 +1,4 @@
-import setBreakpoint from './setBreakpoint.mjs';
-import getBreakpoint from './getBreakpoint.mjs';
+import setBreakpoint from './setBreakpoint.mjs'
+import getBreakpoint from './getBreakpoint.mjs'
 
-export default { setBreakpoint, getBreakpoint };
+export default { setBreakpoint, getBreakpoint }

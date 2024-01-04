@@ -1,4 +1,4 @@
-import { animateCSSModeScroll } from '../../shared/utils.mjs';
+import { animateCSSModeScroll } from '../../shared/utils.mjs'
 
 export default function translateTo(
   translate = 0,
@@ -7,75 +7,92 @@ export default function translateTo(
   translateBounds = true,
   internal,
 ) {
-  const swiper = this;
+  const swiper = this
 
-  const { params, wrapperEl } = swiper;
+  const { params, wrapperEl } = swiper
 
-  if (swiper.animating && params.preventInteractionOnTransition) {
-    return false;
-  }
+  if (swiper.animating && params.preventInteractionOnTransition)
+    return false
 
-  const minTranslate = swiper.minTranslate();
-  const maxTranslate = swiper.maxTranslate();
-  let newTranslate;
-  if (translateBounds && translate > minTranslate) newTranslate = minTranslate;
-  else if (translateBounds && translate < maxTranslate) newTranslate = maxTranslate;
-  else newTranslate = translate;
+  const minTranslate = swiper.minTranslate()
+  const maxTranslate = swiper.maxTranslate()
+  let newTranslate
+
+  if (translateBounds && translate > minTranslate)
+    newTranslate = minTranslate
+  else if (translateBounds && translate < maxTranslate)
+    newTranslate = maxTranslate
+  else newTranslate = translate
 
   // Update progress
-  swiper.updateProgress(newTranslate);
+  swiper.updateProgress(newTranslate)
 
   if (params.cssMode) {
-    const isH = swiper.isHorizontal();
+    const isH = swiper.isHorizontal()
+
     if (speed === 0) {
-      wrapperEl[isH ? 'scrollLeft' : 'scrollTop'] = -newTranslate;
-    } else {
+      wrapperEl[isH ? 'scrollLeft' : 'scrollTop'] = -newTranslate
+    }
+    else {
       if (!swiper.support.smoothScroll) {
-        animateCSSModeScroll({ swiper, targetPosition: -newTranslate, side: isH ? 'left' : 'top' });
-        return true;
+        animateCSSModeScroll({ swiper, targetPosition: -newTranslate, side: isH ? 'left' : 'top' })
+
+        return true
       }
+
       wrapperEl.scrollTo({
         [isH ? 'left' : 'top']: -newTranslate,
         behavior: 'smooth',
-      });
+      })
     }
-    return true;
+
+    return true
   }
 
   if (speed === 0) {
-    swiper.setTransition(0);
-    swiper.setTranslate(newTranslate);
+    swiper.setTransition(0)
+    swiper.setTranslate(newTranslate)
+
     if (runCallbacks) {
-      swiper.emit('beforeTransitionStart', speed, internal);
-      swiper.emit('transitionEnd');
+      swiper.emit('beforeTransitionStart', speed, internal)
+      swiper.emit('transitionEnd')
     }
-  } else {
-    swiper.setTransition(speed);
-    swiper.setTranslate(newTranslate);
+  }
+  else {
+    swiper.setTransition(speed)
+    swiper.setTranslate(newTranslate)
+
     if (runCallbacks) {
-      swiper.emit('beforeTransitionStart', speed, internal);
-      swiper.emit('transitionStart');
+      swiper.emit('beforeTransitionStart', speed, internal)
+      swiper.emit('transitionStart')
     }
+
     if (!swiper.animating) {
-      swiper.animating = true;
+      swiper.animating = true
+
       if (!swiper.onTranslateToWrapperTransitionEnd) {
         swiper.onTranslateToWrapperTransitionEnd = function transitionEnd(e) {
-          if (!swiper || swiper.destroyed) return;
-          if (e.target !== this) return;
+          if (!swiper || swiper.destroyed)
+            return
+
+          if (e.target !== this)
+            return
+
           swiper.wrapperEl.removeEventListener(
             'transitionend',
             swiper.onTranslateToWrapperTransitionEnd,
-          );
-          swiper.onTranslateToWrapperTransitionEnd = null;
-          delete swiper.onTranslateToWrapperTransitionEnd;
-          if (runCallbacks) {
-            swiper.emit('transitionEnd');
-          }
-        };
+          )
+          swiper.onTranslateToWrapperTransitionEnd = null
+          delete swiper.onTranslateToWrapperTransitionEnd
+
+          if (runCallbacks)
+            swiper.emit('transitionEnd')
+        }
       }
-      swiper.wrapperEl.addEventListener('transitionend', swiper.onTranslateToWrapperTransitionEnd);
+
+      swiper.wrapperEl.addEventListener('transitionend', swiper.onTranslateToWrapperTransitionEnd)
     }
   }
 
-  return true;
+  return true
 }

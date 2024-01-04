@@ -1,15 +1,16 @@
-export const updateOnVirtualData = (swiper) => {
+export function updateOnVirtualData(swiper) {
   if (
-    !swiper ||
-    swiper.destroyed ||
-    !swiper.params.virtual ||
-    (swiper.params.virtual && !swiper.params.virtual.enabled)
+    !swiper
+    || swiper.destroyed
+    || !swiper.params.virtual
+    || (swiper.params.virtual && !swiper.params.virtual.enabled)
   )
-    return;
-  swiper.updateSlides();
-  swiper.updateProgress();
-  swiper.updateSlidesClasses();
-  if (swiper.parallax && swiper.params.parallax && swiper.params.parallax.enabled) {
-    swiper.parallax.setTranslate();
-  }
-};
+    return
+
+  swiper.updateSlides()
+  swiper.updateProgress()
+  swiper.updateSlidesClasses()
+
+  if (swiper.parallax && swiper.params.parallax?.enabled)
+    swiper.parallax.setTranslate()
+}

@@ -1,3 +1,8 @@
+/* eslint-disable ts/member-ordering */
+/* eslint-disable consistent-this */
+/* eslint-disable ts/no-this-alias */
+/* eslint-disable unicorn/no-this-assignment */
+/* eslint-disable ts/explicit-member-accessibility */
 /* eslint no-param-reassign: "off" */
 import { getDocument } from '@teleskop-labs/ssr-window'
 import {

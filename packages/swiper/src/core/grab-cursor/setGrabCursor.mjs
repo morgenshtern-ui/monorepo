@@ -1,20 +1,24 @@
 export default function setGrabCursor(moving) {
-  const swiper = this;
+  const swiper = this
+
   if (
-    !swiper.params.simulateTouch ||
-    (swiper.params.watchOverflow && swiper.isLocked) ||
-    swiper.params.cssMode
+    !swiper.params.simulateTouch
+    || (swiper.params.watchOverflow && swiper.isLocked)
+    || swiper.params.cssMode
   )
-    return;
-  const el = swiper.params.touchEventsTarget === 'container' ? swiper.el : swiper.wrapperEl;
-  if (swiper.isElement) {
-    swiper.__preventObserver__ = true;
-  }
-  el.style.cursor = 'move';
-  el.style.cursor = moving ? 'grabbing' : 'grab';
+    return
+
+  const el = swiper.params.touchEventsTarget === 'container' ? swiper.el : swiper.wrapperEl
+
+  if (swiper.isElement)
+    swiper.__preventObserver__ = true
+
+  el.style.cursor = 'move'
+  el.style.cursor = moving ? 'grabbing' : 'grab'
+
   if (swiper.isElement) {
     requestAnimationFrame(() => {
-      swiper.__preventObserver__ = false;
-    });
+      swiper.__preventObserver__ = false
+    })
   }
 }

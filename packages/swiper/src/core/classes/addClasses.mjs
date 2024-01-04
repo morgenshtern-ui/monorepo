@@ -1,38 +1,41 @@
 function prepareClasses(entries, prefix) {
-  const resultClasses = [];
-  entries.forEach((item) => {
+  const resultClasses = []
+
+  for (const item of entries) {
     if (typeof item === 'object') {
-      Object.keys(item).forEach((classNames) => {
-        if (item[classNames]) {
-          resultClasses.push(prefix + classNames);
-        }
-      });
-    } else if (typeof item === 'string') {
-      resultClasses.push(prefix + item);
+      for (const classNames of Object.keys(item)) {
+        if (item[classNames])
+          resultClasses.push(prefix + classNames)
+      }
     }
-  });
-  return resultClasses;
+    else if (typeof item === 'string') {
+      resultClasses.push(prefix + item)
+    }
+  }
+
+  return resultClasses
 }
 
 export default function addClasses() {
-  const swiper = this;
-  const { classNames, params, rtl, el, device } = swiper;
+  const swiper = this
+  const { classNames, params, rtl, el, device } = swiper
   // prettier-ignore
   const suffixes = prepareClasses([
     'initialized',
     params.direction,
     { 'free-mode': swiper.params.freeMode && params.freeMode.enabled },
-    { 'autoheight': params.autoHeight },
-    { 'rtl': rtl },
-    { 'grid': params.grid && params.grid.rows > 1 },
+    { autoheight: params.autoHeight },
+    { rtl },
+    { grid: params.grid && params.grid.rows > 1 },
     { 'grid-column': params.grid && params.grid.rows > 1 && params.grid.fill === 'column' },
-    { 'android': device.android },
-    { 'ios': device.ios },
+    { android: device.android },
+    { ios: device.ios },
     { 'css-mode': params.cssMode },
-    { 'centered': params.cssMode && params.centeredSlides },
+    { centered: params.cssMode && params.centeredSlides },
     { 'watch-progress': params.watchSlidesProgress },
-  ], params.containerModifierClass);
-  classNames.push(...suffixes);
-  el.classList.add(...classNames);
-  swiper.emitContainerClasses();
+  ], params.containerModifierClass)
+
+  classNames.push(...suffixes)
+  el.classList.add(...classNames)
+  swiper.emitContainerClasses()
 }

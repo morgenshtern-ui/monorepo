@@ -1,4 +1,4 @@
-import { Swiper } from './swiper.mjs'
+import { Swiper } from './swiper.ts'
 
 const swiper = new Swiper('.swiper', {
   slidesPerView: 5,

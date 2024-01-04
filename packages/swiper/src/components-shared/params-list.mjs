@@ -117,5 +117,6 @@ const paramsList = [
   'virtual',
   'zoom',
   'control',
-];
-export { paramsList };
+]
+
+export { paramsList }

@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      consola:
+        specifier: ^3.2.3
+        version: 3.2.3
     devDependencies:
       '@teleskop-labs/eslint-config':
         specifier: workspace:*
@@ -46,6 +50,12 @@ importers:
         version: 2.6.1(@vue/compiler-sfc@3.4.3)(eslint@8.56.0)(typescript@5.3.3)(vitest@1.1.1)
 
   config/tsconfig: {}
+
+  packages/css-box-model:
+    dependencies:
+      '@teleskop-labs/utils':
+        specifier: workspace:*
+        version: link:../../utils
 
   packages/ssr-window:
     dependencies:
@@ -1428,6 +1438,11 @@ packages:
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
+
+  /consola@3.2.3:
+    resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    dev: false
 
   /core-js-compat@3.35.0:
     resolution: {integrity: sha512-5blwFAddknKeNgsjBzilkdQ0+YK8L1PfqPYq40NOYMYFSS38qj+hpTcLLWwpIwA2A5bje/x5jmVn2tzUMg9IVw==}

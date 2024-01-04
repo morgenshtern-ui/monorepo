@@ -1,0 +1,20 @@
+{
+  "name": "@teleskop-labs/css-box-model",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "eslint": "eslint . --max-warnings 0",
+    "eslint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@teleskop-labs/utils": "workspace:*"
+  }
+}

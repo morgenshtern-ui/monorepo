@@ -13,6 +13,11 @@
   "engines": {
     "node": ">=18"
   },
+  "workspaces": [
+    "packages/*",
+    "config/*",
+    "utils"
+  ],
   "devDependencies": {
     "@teleskop-labs/eslint-config": "workspace:*",
     "@teleskop-labs/tsconfig": "workspace:*",

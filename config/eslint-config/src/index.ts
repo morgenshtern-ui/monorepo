@@ -11,7 +11,7 @@ const defaultOptions: Options = {
 }
 
 export default async function make({
-  tsconfigPath = 'tsconfig.json',
+  tsconfigPath = 'tsconfig.eslint.json',
 }: Options = defaultOptions): Promise<FlatConfigItem[]> {
   const result: FlatConfigItem[] = await antfu({
     javascript: {

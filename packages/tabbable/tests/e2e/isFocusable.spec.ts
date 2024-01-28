@@ -686,7 +686,7 @@ test.describe('isFocusable', () => {
       })
     })
 
-    test.describe.only('display check', () => {
+    test.describe('display check', () => {
       const fixture = `
         <div data-testid="displayed-top" tabindex="0">
           <div data-testid="displayed-nested" tabindex="0"></div>

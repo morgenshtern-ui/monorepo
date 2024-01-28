@@ -9,7 +9,7 @@
   "scripts": {
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix",
-    "typecheck": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "test": "vitest"
   },
   "dependencies": {

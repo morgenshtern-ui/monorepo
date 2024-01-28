@@ -13,7 +13,7 @@
   "scripts": {
     "eslint": "eslint . --max-warnings 0",
     "eslint:fix": "eslint --fix",
-    "typecheck": "tsc --noEmit"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@teleskop-labs/utils": "workspace:*"

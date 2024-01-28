@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "project-root",
+      "path": "./"
+    },
+    {
+      "name": "utils",
+      "path": "utils"
+    },
+    {
+      "name": "tabbable",
+      "path": "packages/tabbable"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "node_modules/": true,
+    },
+  }
+}

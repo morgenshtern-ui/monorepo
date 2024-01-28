@@ -1,9 +1,19 @@
-import makeEslintConfig from '@antfu/eslint-config'
+/* eslint-disable node/prefer-global/process */
+import pluginPlaywright from 'eslint-plugin-playwright'
+import { type FlatConfigItem, GLOB_SRC_EXT, antfu, test } from '@antfu/eslint-config'
 
-/* eslint perfectionist/sort-objects: "error" */
+interface Options {
+  tsconfigPath?: string[] | string | undefined
+}
 
-export default async function make() {
-  const result = await makeEslintConfig({
+const defaultOptions: Options = {
+  tsconfigPath: 'tsconfig.eslint.json',
+}
+
+export default async function make({
+  tsconfigPath = 'tsconfig.json',
+}: Options = defaultOptions): Promise<FlatConfigItem[]> {
+  const result: FlatConfigItem[] = await antfu({
     javascript: {
       overrides: {
         'array-callback-return': ['error', { allowImplicit: false, allowVoid: false, checkForEach: false }],
@@ -124,6 +134,8 @@ export default async function make() {
 
     stylistic: true,
 
+    test: false,
+
     typescript: {
       overrides: {
         'class-methods-use-this': 'off',
@@ -174,7 +186,7 @@ export default async function make() {
         'ts/no-namespace': 'error',
         'ts/no-non-null-asserted-nullish-coalescing': 'error',
         'ts/no-non-null-asserted-optional-chain': 'error',
-        'ts/no-non-null-assertion': 'error',
+        'ts/no-non-null-assertion': 'warn',
         'ts/no-redundant-type-constituents': 'error',
         'ts/no-shadow': 'error',
         'ts/no-this-alias': 'error',
@@ -211,7 +223,7 @@ export default async function make() {
         // 'prefer-destructuring': 'off',
         'ts/prefer-literal-enum-member': 'error',
         'ts/prefer-namespace-keyword': 'error',
-        'ts/prefer-nullish-coalescing': 'error',
+        'ts/prefer-nullish-coalescing': 'off', // TODO: enable?
         'ts/prefer-optional-chain': 'error',
         'ts/prefer-readonly': 'error',
         'ts/prefer-readonly-parameter-types': 'off', // TODO: enable?
@@ -227,7 +239,7 @@ export default async function make() {
         'ts/typedef': 'off',
         'ts/unified-signatures': 'off', // TODO: enable?
       },
-      tsconfigPath: 'tsconfig.json',
+      tsconfigPath,
     },
   }, {
     // node
@@ -335,7 +347,47 @@ export default async function make() {
       'unicorn/template-indent': 'error',
       'unicorn/text-encoding-identifier-case': 'error',
     },
+  }, test({
+    files: [
+      `**/__tests__/**/*.${GLOB_SRC_EXT}`,
+      `**/*.spec.${GLOB_SRC_EXT}`,
+      `**/*.test.${GLOB_SRC_EXT}`,
+      `**/*.bench.${GLOB_SRC_EXT}`,
+      `**/*.benchmark.${GLOB_SRC_EXT}`,
+    ],
+    isInEditor: !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+  }), {
+    files: [
+      // `**/e2e/**/*.${GLOB_SRC_EXT}`,
+      `**/e2e/**/*.spec.${GLOB_SRC_EXT}`,
+      `**/e2e/**/*.test.${GLOB_SRC_EXT}`,
+      `**/e2e/**/*.bench.${GLOB_SRC_EXT}`,
+      `**/e2e/**/*.benchmark.${GLOB_SRC_EXT}`,
+    ],
+    name: 'antfu:playwright',
+    ...pluginPlaywright.configs['flat/recommended'],
+  }, {
+    files: ['**/*.ts', '**/*.js'],
+    rules: {
+      'dot-notation': 'off',
+    },
+  }, {
+    files: ['**/*.ts'],
+    rules: {
+      'perfectionist/sort-objects': 'error',
+    },
+  }, {
+    files: [
+        `**/__tests__/**/*.${GLOB_SRC_EXT}`,
+        `**/*.spec.${GLOB_SRC_EXT}`,
+        `**/*.test.${GLOB_SRC_EXT}`,
+        `**/*.bench.${GLOB_SRC_EXT}`,
+        `**/*.benchmark.${GLOB_SRC_EXT}`,
+    ],
+    rules: {
+      'ts/no-loop-func': 'off',
+    },
   })
 
-  return result as unknown
+  return result
 }

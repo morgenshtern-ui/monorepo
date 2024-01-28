@@ -1,0 +1,20 @@
+{
+  "extends": "@teleskop-labs/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*",
+    "tests/**/*",
+    "vite.config.*",
+    "vitest.config.*",
+    "playwright.config.*",
+    "eslint.config.*"
+  ]
+}

@@ -1,3 +1,3 @@
-import antfu from './src/index.js'
+import makeEslintConfig from './src/index.js'
 
-export default antfu()
+export default makeEslintConfig()

@@ -1,5 +1,3 @@
-import { consola } from 'consola/browser'
-
 // # The CSS box model
 // > https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
 //
@@ -224,7 +222,7 @@ function parse(raw: string): number {
   const result: number = Number(value)
 
   if (Number.isNaN(result))
-    consola.error(`Could not parse value [raw: ${raw}, without suffix: ${value}]`)
+    throw new Error(`Could not parse value [raw: ${raw}, without suffix: ${value}]`)
 
   return result
 }

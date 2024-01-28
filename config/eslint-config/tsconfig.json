@@ -1,7 +1,0 @@
-{
-  "extends": "@teleskop-labs/tsconfig/tsconfig.json",
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": ["node_modules"]
-}

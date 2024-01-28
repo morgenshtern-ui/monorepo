@@ -1,0 +1,8 @@
+{
+  "extends": "@teleskop-labs/tsconfig/tsconfig.json",
+  "include": [
+    "**/*",
+    "eslint.config.*"
+  ],
+  "exclude": ["node_modules"]
+}

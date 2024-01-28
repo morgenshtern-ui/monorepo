@@ -1,3 +1,3 @@
-import antfu from '@teleskop-labs/eslint-config'
+import defineConfig from '@teleskop-labs/eslint-config'
 
-export default antfu()
+export default defineConfig()

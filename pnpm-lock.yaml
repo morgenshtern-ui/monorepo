@@ -75,21 +75,20 @@ importers:
         specifier: workspace:*
         version: link:../../utils
 
+  packages/dnd:
+    dependencies:
+      '@teleskop-labs/css-box-model':
+        specifier: workspace:^
+        version: link:../css-box-model
+      '@teleskop-labs/utils':
+        specifier: workspace:*
+        version: link:../../utils
+
   packages/ssr-window:
     dependencies:
       '@teleskop-labs/utils':
         specifier: workspace:*
         version: link:../../utils
-
-  packages/swiper:
-    dependencies:
-      '@teleskop-labs/ssr-window':
-        specifier: workspace:*
-        version: link:../ssr-window
-    devDependencies:
-      vite:
-        specifier: 5.0.8
-        version: 5.0.8(@types/node@20.10.6)
 
   packages/tabbable:
     dependencies:
@@ -4189,42 +4188,6 @@ packages:
       rollup: 4.9.2
     optionalDependencies:
       fsevents: 2.3.3
-
-  /vite@5.0.8(@types/node@20.10.6):
-    resolution: {integrity: sha512-jYMALd8aeqR3yS9xlHd0OzQJndS9fH5ylVgWdB+pxTwxLKdO1pgC5Dlb398BUxpfaBxa4M9oT7j1g503Gaj5IQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || >=20.0.0
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.10.6
-      esbuild: 0.19.11
-      postcss: 8.4.32
-      rollup: 4.9.2
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
 
   /vitest@1.1.1(@types/node@20.10.6)(jsdom@23.2.0):
     resolution: {integrity: sha512-Ry2qs4UOu/KjpXVfOCfQkTnwSXYGrqTbBZxw6reIYEFjSy1QUARRg5pxiI5BEXy+kBVntxUYNMlq4Co+2vD3fQ==}

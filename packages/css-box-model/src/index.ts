@@ -73,31 +73,31 @@ export function getBox(el: Element): BoxModel {
 // then you can simply pass them in
 export function calculateBox(borderBox: AnyRectType, styles: CSSStyleDeclaration): BoxModel {
   const margin: Spacing = {
-    top: parse(styles.marginTop),
-    right: parse(styles.marginRight),
     bottom: parse(styles.marginBottom),
     left: parse(styles.marginLeft),
+    right: parse(styles.marginRight),
+    top: parse(styles.marginTop),
   }
 
   const padding: Spacing = {
-    top: parse(styles.paddingTop),
-    right: parse(styles.paddingRight),
     bottom: parse(styles.paddingBottom),
     left: parse(styles.paddingLeft),
+    right: parse(styles.paddingRight),
+    top: parse(styles.paddingTop),
   }
 
   const border: Spacing = {
-    top: parse(styles.borderTopWidth),
-    right: parse(styles.borderRightWidth),
     bottom: parse(styles.borderBottomWidth),
     left: parse(styles.borderLeftWidth),
+    right: parse(styles.borderRightWidth),
+    top: parse(styles.borderTopWidth),
   }
 
   return createBox({
+    border,
     borderBox,
     margin,
     padding,
-    border,
   })
 }
 
@@ -106,12 +106,12 @@ export function withScroll(original: BoxModel, scroll: Position = getWindowScrol
 }
 
 export function offset(original: BoxModel, change: Position): BoxModel {
-  const { borderBox, border, margin, padding } = original
+  const { border, borderBox, margin, padding } = original
   const shifted: Spacing = shift(borderBox, change)
 
   return createBox({
-    borderBox: shifted,
     border,
+    borderBox: shifted,
     margin,
     padding,
   })
@@ -119,31 +119,31 @@ export function offset(original: BoxModel, change: Position): BoxModel {
 
 export function expand(target: Spacing, expandBy: Spacing): Spacing {
   return {
-    // pulling back to increase size
-    top: target.top - expandBy.top,
-    left: target.left - expandBy.left,
     // pushing forward to increase size
     bottom: target.bottom + expandBy.bottom,
+    left: target.left - expandBy.left,
     right: target.right + expandBy.right,
+    // pulling back to increase size
+    top: target.top - expandBy.top,
   }
 }
 
 export function shrink(target: Spacing, shrinkBy: Spacing): Spacing {
   return {
-    // pushing forward to decrease size
-    top: target.top + shrinkBy.top,
-    left: target.left + shrinkBy.left,
     // pulling backwards to decrease size
     bottom: target.bottom - shrinkBy.bottom,
+    left: target.left + shrinkBy.left,
     right: target.right - shrinkBy.right,
+    // pushing forward to decrease size
+    top: target.top + shrinkBy.top,
   }
 }
 
 const noSpacing: Spacing = {
-  top: 0,
-  right: 0,
   bottom: 0,
   left: 0,
+  right: 0,
+  top: 0,
 }
 
 interface CreateBoxArgs {
@@ -154,9 +154,9 @@ interface CreateBoxArgs {
 }
 
 export function createBox({
+  border = noSpacing,
   borderBox,
   margin = noSpacing,
-  border = noSpacing,
   padding = noSpacing,
 }: CreateBoxArgs): BoxModel {
   // marginBox = borderBox + margin
@@ -167,36 +167,36 @@ export function createBox({
   const contentBox: Rect = getRect(shrink(paddingBox, padding))
 
   return {
-    marginBox,
+    border,
     borderBox: getRect(borderBox),
-    paddingBox,
     contentBox,
     margin,
-    border,
+    marginBox,
     padding,
+    paddingBox,
   }
 }
 
-export function getRect({ top, right, bottom, left }: Spacing): Rect {
+export function getRect({ bottom, left, right, top }: Spacing): Rect {
   const width: number = right - left
   const height: number = bottom - top
 
   const rect: Rect = {
-    // ClientRect
-    top,
-    right,
     bottom,
-    left,
-    width,
-    height,
-    // DOMRect
-    x: left,
-    y: top,
     // Rect
     center: {
       x: (right + left) / 2,
       y: (bottom + top) / 2,
     },
+    height,
+    left,
+    right,
+    // ClientRect
+    top,
+    width,
+    // DOMRect
+    x: left,
+    y: top,
   }
 
   return rect
@@ -236,9 +236,9 @@ function getWindowScroll(): Position {
 
 function shift(target: Spacing, shiftBy: Position): Spacing {
   return {
-    top: target.top + shiftBy.y,
-    left: target.left + shiftBy.x,
     bottom: target.bottom + shiftBy.y,
+    left: target.left + shiftBy.x,
     right: target.right + shiftBy.x,
+    top: target.top + shiftBy.y,
   }
 }

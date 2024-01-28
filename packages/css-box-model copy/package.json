@@ -15,6 +15,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@teleskop-labs/css-box-model": "workspace:^",
     "@teleskop-labs/utils": "workspace:*"
   }
 }

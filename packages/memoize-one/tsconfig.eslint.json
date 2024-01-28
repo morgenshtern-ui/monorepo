@@ -1,0 +1,14 @@
+{
+  "extends": "@teleskop-labs/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "vitest.config.*",
+    "playwright.config.*",
+    "eslint.config.*"
+  ]
+}

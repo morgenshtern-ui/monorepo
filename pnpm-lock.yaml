@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      consola:
-        specifier: ^3.2.3
-        version: 3.2.3
     devDependencies:
       '@teleskop-labs/eslint-config':
         specifier: workspace:*
@@ -27,12 +23,18 @@ importers:
       '@types/node':
         specifier: 20.10.6
         version: 20.10.6
+      consola:
+        specifier: ^3.2.3
+        version: 3.2.3
       eslint:
         specifier: npm:eslint-ts-patch@8.56.0-0
         version: /eslint-ts-patch@8.56.0-0
       eslint-ts-patch:
         specifier: 8.56.0-0
         version: 8.56.0-0
+      expect-type:
+        specifier: ^0.17.3
+        version: 0.17.3
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -51,6 +53,9 @@ importers:
       turbo:
         specifier: 1.11.2
         version: 1.11.2
+      type-fest:
+        specifier: ^4.10.1
+        version: 4.10.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -71,18 +76,34 @@ importers:
 
   packages/css-box-model:
     dependencies:
-      '@teleskop-labs/utils':
-        specifier: workspace:*
-        version: link:../../utils
+      '@teleskop-labs/tiny-invariant':
+        specifier: workspace:^
+        version: link:../tiny-invariant
 
   packages/dnd:
     dependencies:
       '@teleskop-labs/css-box-model':
         specifier: workspace:^
         version: link:../css-box-model
+      '@teleskop-labs/memoize-one':
+        specifier: workspace:^
+        version: link:../memoize-one
+      '@teleskop-labs/tiny-invariant':
+        specifier: workspace:^
+        version: link:../tiny-invariant
       '@teleskop-labs/utils':
         specifier: workspace:*
         version: link:../../utils
+
+  packages/memoize-one:
+    dependencies:
+      '@teleskop-labs/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      vitest:
+        specifier: 1.1.1
+        version: 1.1.1(@types/node@20.10.6)(jsdom@23.2.0)
 
   packages/ssr-window:
     dependencies:
@@ -111,6 +132,8 @@ importers:
       vue-tsc:
         specifier: 1.8.25
         version: 1.8.25(typescript@5.3.3)
+
+  packages/tiny-invariant: {}
 
   utils:
     dependencies:
@@ -1570,7 +1593,7 @@ packages:
   /consola@3.2.3:
     resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
     engines: {node: ^14.18.0 || >=16.10.0}
-    dev: false
+    dev: true
 
   /core-js-compat@3.35.0:
     resolution: {integrity: sha512-5blwFAddknKeNgsjBzilkdQ0+YK8L1PfqPYq40NOYMYFSS38qj+hpTcLLWwpIwA2A5bje/x5jmVn2tzUMg9IVw==}
@@ -2250,6 +2273,11 @@ packages:
       onetime: 6.0.0
       signal-exit: 4.1.0
       strip-final-newline: 3.0.0
+
+  /expect-type@0.17.3:
+    resolution: {integrity: sha512-K0ZdZJ97jiAtaOwhEHHz/f0N6Xbj5reRz5g6+5BO7+OvqQ7PMQz0/c8bFSJs1zPotNJL5HJaC6t6lGPEAtGyOw==}
+    engines: {node: '>=12.0.0'}
+    dev: true
 
   /exponential-backoff@3.1.1:
     resolution: {integrity: sha512-dX7e/LHVJ6W3DE1MHWi9S1EYzDESENfLrYohG2G++ovZrYOkm4Knwa0mc1cn84xJOR4KEU0WSchhLbd0UklbHw==}
@@ -3562,7 +3590,7 @@ packages:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.0
       parse-json: 7.1.1
-      type-fest: 4.9.0
+      type-fest: 4.10.1
     dev: true
 
   /regexp-tree@0.1.27:
@@ -4041,8 +4069,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /type-fest@4.9.0:
-    resolution: {integrity: sha512-KS/6lh/ynPGiHD/LnAobrEFq3Ad4pBzOlJ1wAnJx9N4EYoqFhMfLIBjUT2UEx4wg5ZE+cC1ob6DCSpppVo+rtg==}
+  /type-fest@4.10.1:
+    resolution: {integrity: sha512-7ZnJYTp6uc04uYRISWtiX3DSKB/fxNQT0B5o1OUeCqiQiwF+JC9+rJiZIDrPrNCLLuTqyQmh4VdQqh/ZOkv9MQ==}
     engines: {node: '>=16'}
     dev: true
 

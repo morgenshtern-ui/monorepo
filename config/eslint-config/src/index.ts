@@ -6,13 +6,13 @@ interface Options {
   tsconfigPath?: string[] | string | undefined
 }
 
-const defaultOptions: Options = {
-  tsconfigPath: 'tsconfig.eslint.json',
-}
+// const defaultOptions: Options = {
+//   tsconfigPath: 'tsconfig.eslint.json',
+// }
 
 export default async function make({
-  tsconfigPath = 'tsconfig.eslint.json',
-}: Options = defaultOptions): Promise<FlatConfigItem[]> {
+  tsconfigPath
+}: Options): Promise<FlatConfigItem[]> {
   const result: FlatConfigItem[] = await antfu({
     javascript: {
       overrides: {
@@ -37,6 +37,7 @@ export default async function make({
         'id-denylist': 'off',
         'id-length': 'off',
         'id-match': 'off',
+        'import/extensions': ['error', 'always', { ignorePackages: true }],
         // 'init-declarations': 'off', // TODO: enable?
         'line-comment-position': 'off',
         'logical-assignment-operators': ['error', 'always'],
@@ -141,6 +142,7 @@ export default async function make({
         'class-methods-use-this': 'off',
         'default-param-last': 'off',
         'no-array-constructor': 'off',
+        'no-invalid-this': 'off',
         'no-loop-func': 'off',
         'no-magic-numbers': 'off',
         'no-shadow': 'off',
@@ -241,6 +243,11 @@ export default async function make({
       },
       tsconfigPath,
     },
+  }, {
+    // import
+    // rules: {
+    //   'i/extensions': ['error', 'always'],
+    // },
   }, {
     // node
     rules: {

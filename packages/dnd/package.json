@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@teleskop-labs/css-box-model": "workspace:^",
+    "@teleskop-labs/memoize-one": "workspace:^",
+    "@teleskop-labs/tiny-invariant": "workspace:^",
     "@teleskop-labs/utils": "workspace:*"
   }
 }

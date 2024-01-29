@@ -1,5 +1,6 @@
 import { toString } from './base.js'
 
+export const isNan = Number.isNaN
 export const isDef = <T = any>(val?: T): val is T => val !== undefined
 export const isBoolean = (val: any): val is boolean => typeof val === 'boolean'
 export const isFunction = <T extends Function> (val: any): val is T => typeof val === 'function'

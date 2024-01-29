@@ -1,4 +1,5 @@
-import type { BoxModel, Position, Rect } from 'css-box-model'
+import type { BoxModel, Position, Rect } from '@teleskop-labs/css-box-model'
+import type { Axis } from './state/axis.js'
 
 export type Id = string
 export type DraggableId = Id
@@ -32,32 +33,6 @@ export interface DraggableOptions {
 }
 
 export type Direction = 'horizontal' | 'vertical'
-
-export interface VerticalAxis {
-  direction: 'vertical'
-  line: 'y'
-  start: 'top'
-  end: 'bottom'
-  size: 'height'
-  crossAxisLine: 'x'
-  crossAxisStart: 'left'
-  crossAxisEnd: 'right'
-  crossAxisSize: 'width'
-}
-
-export interface HorizontalAxis {
-  direction: 'horizontal'
-  line: 'x'
-  start: 'left'
-  end: 'right'
-  size: 'width'
-  crossAxisLine: 'y'
-  crossAxisStart: 'top'
-  crossAxisEnd: 'bottom'
-  crossAxisSize: 'height'
-}
-
-export type Axis = HorizontalAxis | VerticalAxis
 
 export interface ScrollSize {
   scrollHeight: number
@@ -99,16 +74,35 @@ export interface DraggableDimension {
   displaceBy: Position
 }
 
+/**
+ * Интерфейс для объекта, который может прокручиваться.
+ *
+ * @property {Rect} pageMarginBox - Окно, через которое наблюдается объект. Не меняется во время перетаскивания.
+ * @property {BoxModel} frameClient - Используется для сравнения с динамическим пересбором.
+ * @property {ScrollSize} scrollSize - Размер прокрутки.
+ * @property {boolean} shouldClipSubject - Должен ли объект быть обрезан по рамке. Контролируется свойством ignoreContainerClipping.
+ * @property {ScrollDetails} scroll - Детали прокрутки.
+ */
 export interface Scrollable {
-  // This is the window through which the droppable is observed
-  // It does not change during a drag
+  /**
+   * Окно, через которое наблюдается объект. Не меняется во время перетаскивания.
+   */
   pageMarginBox: Rect
-  // Used for comparision with dynamic recollecting
+  /**
+   * Используется для сравнения с динамическим recollecting.
+   */
   frameClient: BoxModel
+  /**
+   * Размер прокрутки.
+   */
   scrollSize: ScrollSize
-  // Whether or not we should clip the subject by the frame
-  // Is controlled by the ignoreContainerClipping prop
+  /**
+   * Должен ли объект быть обрезан по frame. Контролируется свойством ignoreContainerClipping.
+   */
   shouldClipSubject: boolean
+  /**
+   * Детали прокрутки.
+   */
   scroll: ScrollDetails
 }
 

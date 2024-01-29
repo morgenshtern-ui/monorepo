@@ -1,5 +1,5 @@
 {
-  "name": "@teleskop-labs/css-box-model",
+  "name": "@teleskop-labs/tiny-invariant",
   "type": "module",
   "version": "0.0.0",
   "private": true,
@@ -13,8 +13,5 @@
     "eslint": "eslint . --max-warnings 0",
     "eslint:fix": "eslint --fix",
     "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@teleskop-labs/tiny-invariant": "workspace:^"
   }
 }

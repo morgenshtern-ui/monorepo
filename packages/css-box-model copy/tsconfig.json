@@ -1,5 +1,0 @@
-{
-  "extends": "@teleskop-labs/tsconfig/tsconfig.json",
-  "include": ["../dnd/src", "../dnd/eslint.config.ts"],
-  "exclude": ["../dnd/node_modules", "../dnd/dist", "../dnd/build", "../dnd/coverage", "../dnd/test", "../dnd/tests", "../dnd/testsuite", "../dnd/testsuites", "../dnd/tmp", "../dnd/temp", "../dnd/vendor"]
-}

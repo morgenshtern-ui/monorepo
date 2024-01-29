@@ -1,3 +1,5 @@
+import { invariant } from '@teleskop-labs/tiny-invariant'
+
 // # The CSS box model
 // > https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
 //
@@ -61,16 +63,28 @@ export interface Spacing {
   left: number
 }
 
+/**
+ * Получает модель блока для элемента.
+ *
+ * @param {Element} el - Элемент.
+ * @returns {BoxModel} Возвращает модель блока.
+ */
 export function getBox(el: Element): BoxModel {
-  // getBoundingClientRect always returns the borderBox
+  // getBoundingClientRect всегда возвращает borderBox
   const borderBox: DOMRect = el.getBoundingClientRect()
   const styles: CSSStyleDeclaration = window.getComputedStyle(el)
 
   return calculateBox(borderBox, styles)
 }
 
-// Exposing this function directly for performance. If you have already computed these things
-// then you can simply pass them in
+/**
+ * Эта функция напрямую доступна для производительности. Если вы уже вычислили эти вещи,
+ * то вы можете просто передать их.
+ *
+ * @param {AnyRectType} borderBox - Прямоугольник с границами.
+ * @param {CSSStyleDeclaration} styles - Стили элемента.
+ * @returns {BoxModel} Возвращает модель блока.
+ */
 export function calculateBox(borderBox: AnyRectType, styles: CSSStyleDeclaration): BoxModel {
   const margin: Spacing = {
     bottom: parse(styles.marginBottom),
@@ -101,10 +115,24 @@ export function calculateBox(borderBox: AnyRectType, styles: CSSStyleDeclaration
   })
 }
 
+/**
+ * Добавляет прокрутку к оригинальной модели блока.
+ *
+ * @param {BoxModel} original - Оригинальная модель блока.
+ * @param {Position} scroll - Позиция прокрутки.
+ * @returns {BoxModel} Возвращает модель блока с прокруткой.
+ */
 export function withScroll(original: BoxModel, scroll: Position = getWindowScroll()): BoxModel {
   return offset(original, scroll)
 }
 
+/**
+ * Смещает оригинальную модель блока.
+ *
+ * @param {BoxModel} original - Оригинальная модель блока.
+ * @param {Position} change - Изменение позиции.
+ * @returns {BoxModel} Возвращает смещенную модель блока.
+ */
 export function offset(original: BoxModel, change: Position): BoxModel {
   const { border, borderBox, margin, padding } = original
   const shifted: Spacing = shift(borderBox, change)
@@ -117,6 +145,13 @@ export function offset(original: BoxModel, change: Position): BoxModel {
   })
 }
 
+/**
+ * Расширяет целевой объект на заданное значение.
+ *
+ * @param {Spacing} target - Целевой объект.
+ * @param {Spacing} expandBy - Значение, на которое нужно расширить.
+ * @returns {Spacing} Возвращает расширенный объект.
+ */
 export function expand(target: Spacing, expandBy: Spacing): Spacing {
   return {
     // pushing forward to increase size
@@ -128,13 +163,20 @@ export function expand(target: Spacing, expandBy: Spacing): Spacing {
   }
 }
 
+/**
+ * Уменьшает целевой объект на заданное значение.
+ *
+ * @param {Spacing} target - Целевой объект.
+ * @param {Spacing} shrinkBy - Значение, на которое нужно уменьшить.
+ * @returns {Spacing} Возвращает уменьшенный объект.
+ */
 export function shrink(target: Spacing, shrinkBy: Spacing): Spacing {
   return {
-    // pulling backwards to decrease size
+    // двигаем назад, чтобы уменьшить размер
     bottom: target.bottom - shrinkBy.bottom,
     left: target.left + shrinkBy.left,
     right: target.right - shrinkBy.right,
-    // pushing forward to decrease size
+    // двигаем вперед, чтобы уменьшить размер
     top: target.top + shrinkBy.top,
   }
 }
@@ -177,6 +219,12 @@ export function createBox({
   }
 }
 
+/**
+ * Получает прямоугольник на основе заданных значений.
+ *
+ * @param {Spacing} param0 - Объект с полями bottom, left, right, top.
+ * @returns {Rect} Возвращает прямоугольник.
+ */
 export function getRect({ bottom, left, right, top }: Spacing): Rect {
   const width: number = right - left
   const height: number = bottom - top
@@ -202,31 +250,44 @@ export function getRect({ bottom, left, right, top }: Spacing): Rect {
   return rect
 }
 
-// Computed spacing styles will always be in pixels
-// https://codepen.io/alexreardon/pen/OZyqXe
+/**
+ * Вычисленные стили отступов всегда будут в пикселях.
+ * Парсит строку в число.
+ * @see https://codepen.io/alexreardon/pen/OZyqXe
+ *
+ * @param {string} raw - Строка для парсинга.
+ * @returns {number} Возвращает число.
+ */
 function parse(raw: string): number {
   const value: string = raw.slice(0, -2)
   const suffix: string = raw.slice(-2)
 
-  // ## Used values vs computed values
-  // `getComputedStyle` will return the * used values * if the
-  // element has `display: none` and the *computed values* otherwise
-  // *used values* can include 'rem' etc.
-  // Rather than throwing we are returning `0`.
-  // Given that the element is _not visible_ it takes up no visible space and so `0` is correct
+  // ## Используемые значения против вычисленных значений
+  // `getComputedStyle` вернет * используемые значения *, если
+  // элемент имеет `display: none` и *вычисленные значения* в противном случае
+  // *используемые значения* могут включать 'rem' и т.д.
+  // Вместо выбрасывания исключения мы возвращаем `0`.
+  // Учитывая, что элемент _not visible_, он не занимает видимого пространства, поэтому `0` - это правильно
   // ## `jsdom`
-  // The `raw` value can also not be populated in jsdom
+  // Сырое значение также может не быть заполнено в jsdom
   if (suffix !== 'px')
     return 0
 
   const result: number = Number(value)
 
-  if (Number.isNaN(result))
-    throw new Error(`Could not parse value [raw: ${raw}, without suffix: ${value}]`)
+  invariant(
+    !Number.isNaN(result),
+      `Could not parse value [raw: ${raw}, without suffix: ${value}]`,
+  )
 
   return result
 }
 
+/**
+ * Получает текущую позицию прокрутки окна.
+ *
+ * @returns {Position} Возвращает позицию прокрутки.
+ */
 function getWindowScroll(): Position {
   return {
     x: window.scrollX,
@@ -234,6 +295,13 @@ function getWindowScroll(): Position {
   }
 }
 
+/**
+ * Смещает целевой объект на заданную позицию.
+ *
+ * @param {Spacing} target - Целевой объект.
+ * @param {Position} shiftBy - Позиция для смещения.
+ * @returns {Spacing} Возвращает смещенный объект.
+ */
 function shift(target: Spacing, shiftBy: Position): Spacing {
   return {
     bottom: target.bottom + shiftBy.y,
